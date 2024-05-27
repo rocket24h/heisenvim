@@ -25,6 +25,7 @@ M.servers = {
 
 -- Make sure these entries correspond to those listed in the Mason UI
 M.mason_packages = {
+	-- LSPs
 	"basedpyright",
 	"clangd",
 	"html-lsp",
@@ -32,6 +33,9 @@ M.mason_packages = {
 	"eslint-lsp",
 	"vim-language-server",
 	"lua-language-server",
+	"jdtls",
+
+	-- Linters & Formatters
 	"prettier",
 	"stylua",
 	"isort",
