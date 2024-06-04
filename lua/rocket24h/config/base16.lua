@@ -1,0 +1,2 @@
+-- Absolute wasteland of a config file
+-- I'm using this file to overwrite some highlight groups I very much dislike
