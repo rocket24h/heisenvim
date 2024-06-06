@@ -31,17 +31,8 @@ local main_setup = normal_setup
 if telescope_bordered then
 	-- Change border highlight groups since base16 colors sometimes blend in the background
 	-- Feel free to change this if it troubles you
-	local border_color = require("base16-colorscheme").colors.base02
-	local fg = require("base16-colorscheme").colors.base03
-	local bg = api.nvim_get_hl(0, { name = "TelescopeResultsTitle" }).bg
-	local prefix = require("base16-colorscheme").colors.base08
-	local results = require("base16-colorscheme").colors.base0D
-
-	api.nvim_set_hl(0, "TelescopeBorder", { fg = border_color })
-	api.nvim_set_hl(0, "TelescopePromptBorder", { fg = border_color })
-	api.nvim_set_hl(0, "TelescopePromptNormal", { fg = fg })
-	api.nvim_set_hl(0, "TelescopePromptPrefix", { fg = prefix })
-	api.nvim_set_hl(0, "TelescopeResultsTitle", { fg = bg, bg = results })
+	local highligter = require("rocket24h.core.highlights")
+	highligter.overwrite_hl(highligter.telescope)
 
 	-- If you chose to use the bordered setup
 	main_setup = bordered_setup

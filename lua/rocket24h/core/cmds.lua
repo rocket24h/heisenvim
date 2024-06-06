@@ -46,9 +46,6 @@ autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 autocmd("LspAttach", {
 	group = augroup("lsp-attach", { clear = true }),
 	callback = function(event)
-		-- Add our lsp on_attach keymaps here
-		require("rocket24h.core.keymaps").lsp()
-
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client.server_capabilities.documentHighlightProvider then
 			local highlight_augroup = augroup("lsp-highlight", { clear = false })

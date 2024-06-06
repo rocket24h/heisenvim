@@ -1,12 +1,15 @@
 local M = {}
 
 -- First and foremost, your colorscheme here
-M.colorscheme = "base16-black-metal-burzum"
+M.colorscheme = "base16-tomorrow-night"
 
 -- I've decided to make 2 different setups for Telescope UI
 -- I'm currently using the default setup, you can switch to the
 -- bordered setup by changing this variable to true
-M.telescope_bordered = true
+M.telescope_bordered = false
+
+-- Use arrows instead of inline markers for nvim-tree
+M.use_arrows = false
 
 -- NOTE
 -- Since we're not using 3rd-party plugins to automatically install stuff, we gotta be careful with package names

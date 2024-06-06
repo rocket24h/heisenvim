@@ -3,6 +3,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 local utils = require("rocket24h.core.utils")
+local use_arrow = require("rocket24h.core.globals").use_arrows
 
 -- Call setup with some options
 require("nvim-tree").setup({
@@ -61,7 +62,7 @@ require("nvim-tree").setup({
 		highlight_bookmarks = "none",
 		highlight_clipboard = "name",
 		indent_markers = {
-			enable = true,
+			enable = not use_arrow,
 			inline_arrows = false,
 			icons = {
 				corner = "└",
@@ -87,11 +88,11 @@ require("nvim-tree").setup({
 			diagnostics_placement = "signcolumn",
 			bookmarks_placement = "signcolumn",
 			padding = " ",
-			symlink_arrow = "  ",
+			symlink_arrow = "   ",
 			show = {
 				file = true,
 				folder = true,
-				folder_arrow = false,
+				folder_arrow = use_arrow,
 				git = true,
 				modified = true,
 				diagnostics = true,
@@ -104,8 +105,8 @@ require("nvim-tree").setup({
 				bookmark = "󰆤",
 				modified = "●",
 				folder = {
-					arrow_closed = "",
-					arrow_open = "",
+					arrow_closed = " " .. utils.ui.chevron_right .. " ",
+					arrow_open = " " .. utils.ui.chevron_down .. " ",
 					default = "",
 					open = "",
 					empty = "",
@@ -268,8 +269,7 @@ require("nvim-tree").setup({
 	},
 })
 
--- Additional keymaps and color options
-local bg = require("base16-colorscheme").colors.base00
-local fg = require("base16-colorscheme").colors.base0D
-vim.api.nvim_set_hl(0, "NvimTreeWindowPicker", { bg = bg, fg = fg })
+-- Additional keymaps and highlight options
+local highlighter = require("rocket24h.core.highlights")
+highlighter.overwrite_hl(highlighter.tree)
 require("rocket24h.core.keymaps").nvim_tree()

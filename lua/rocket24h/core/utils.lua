@@ -39,6 +39,7 @@ M.ui = {
 	circle_chevron_down = "",
 	file_tree = "",
 	gear = "",
+	gitbranch = "",
 	github = "",
 	indicator = "",
 	lock = "",

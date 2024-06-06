@@ -8,16 +8,18 @@ local colorscheme = require("rocket24h.core.globals").colorscheme
 local _, theme = pcall(require, "rocket24h.config.themes." .. colorscheme .. "-heirline")
 local _, devicons = pcall(require, "nvim-web-devicons")
 local _, utils = pcall(require, "rocket24h.core.utils")
+-- In case file does not exist
 if not theme then
-	return
+	theme = require("rocket24h.config.themes.default-heirline")
 end
 local colors = theme.colors
-vim.api.nvim_set_hl(0, "StatusLine", { bg = colors.bright_bg })
+
 -- ========================
 -- GETTING THE PARTS READY
 -- ========================
 local Align = { provider = "%=" }
 local Space = { provider = " " }
+
 -- Define modes and their displayed names here
 local VimModes = {
 	init = function(self)
@@ -100,7 +102,7 @@ local FileIcon = {
 		return self.icon .. " "
 	end,
 	hl = function(self)
-		return { fg = colors.fg }
+		return { fg = colors.gray }
 	end,
 }
 
@@ -117,7 +119,7 @@ local FileName = {
 		return filename
 	end,
 	hl = {
-		fg = colors.fg,
+		fg = colors.gray,
 	},
 }
 
@@ -135,7 +137,7 @@ local FileFlags = {
 local FileNameModifier = {
 	hl = function()
 		if vim.bo.modified then
-			return { fg = colors.green, bold = true, force = true }
+			return { fg = colors.fg, bold = true, force = true }
 		end
 	end,
 }
@@ -144,7 +146,7 @@ local FileType = {
 	provider = function()
 		return string.upper(vim.bo.filetype)
 	end,
-	hl = { fg = heirline_utils.get_highlight("Type").fg, bold = true },
+	hl = { fg = colors.purple, bold = true },
 }
 
 -- Fun little scrollbar
@@ -185,7 +187,7 @@ local LSPInfo = {
 	},
 	provider = function()
 		local names = {}
-		for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+		for i, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 			table.insert(names, server.name)
 		end
 		return utils.ui.gear .. "  " .. table.concat(names, " ")
@@ -246,13 +248,13 @@ local Git = {
 		self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
 	end,
 
-	hl = { fg = colors.blue, bg = colors.bg },
+	hl = { fg = colors.blue, bg = colors.bright_bg },
 
 	{ -- git branch name
 		provider = function(self)
-			return utils.ui.github .. " " .. self.status_dict.head .. " "
+			return utils.ui.gitbranch .. " " .. self.status_dict.head .. " "
 		end,
-		hl = { bold = true, fg = colors.orange },
+		hl = { bold = true, fg = colors.gray },
 	},
 	{
 		provider = function(self)
@@ -277,22 +279,6 @@ local Git = {
 	},
 }
 
-local SearchCount = {
-	condition = function()
-		return vim.v.hlsearch ~= 0 and vim.o.cmdheight == 0
-	end,
-	init = function(self)
-		local ok, search = pcall(vim.fn.searchcount)
-		if ok and search.total then
-			self.search = search
-		end
-	end,
-	provider = function(self)
-		local search = self.search
-		return string.format("[%d/%d]", search.current, math.min(search.total, search.maxcount))
-	end,
-}
-
 local TerminalName = {
 	provider = function()
 		local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
@@ -311,16 +297,26 @@ local HelpFileName = {
 	end,
 	hl = { fg = colors.blue },
 }
+
 -- ====================
 -- ASSEMBLY LINES HERE
 -- ====================
 
-VimModes = heirline_utils.surround({ "", utils.chars.right_semicircle }, function(self)
-	return self:get_mode_color()
-end, { VimModes })
-Ruler = heirline_utils.surround({ utils.chars.left_semicircle, " " }, function(self)
-	return self:get_mode_color()
-end, { Ruler, Space })
+VimModes = heirline_utils.surround(
+	{ utils.chars.left_semicircle, utils.chars.block .. utils.chars.lower_right_angled_triangle },
+	function(self)
+		return self:get_mode_color()
+	end,
+	{ VimModes }
+)
+
+Ruler = heirline_utils.surround(
+	{ utils.chars.upper_right_angled_triangle, utils.chars.right_semicircle },
+	function(self)
+		return self:get_mode_color()
+	end,
+	{ Ruler, Space }
+)
 
 FileNameBlock = heirline_utils.insert(
 	FileNameBlock,
@@ -330,32 +326,32 @@ FileNameBlock = heirline_utils.insert(
 	{ provider = "%<" }
 )
 
-local active_left_segment = {
-	VimModes,
+local left_segment = {
+	heirline_utils.surround(
+		{ "", utils.chars.lower_right_angled_triangle },
+		colors.bg,
+		{ VimModes, Space, FileNameBlock, Space }
+	),
 	Space,
-	heirline_utils.surround({ " ", " " }, colors.bg, { Git, Space }),
+	heirline_utils.surround({ " ", " " }, colors.bright_bg, { Git, Space }),
 }
 
-local active_middle_segment = {
-	FileNameBlock,
-}
-
-local active_right_segment = {
-	Diagnostics,
+local right_segment = {
+	heirline_utils.surround({ " ", " " }, colors.bright_bg, { Diagnostics }),
 	Space,
+	heirline_utils.surround(
+		{ utils.chars.upper_right_angled_triangle, "" },
+		colors.bg,
+		{ Space, LSPInfo, Space, Ruler }
+	),
 	Space,
-	LSPInfo,
-	Space,
-	Ruler,
 	ScrollBar,
 }
 
 local DefaultStatusLine = {
-	heirline_utils.surround({ "", utils.chars.right_semicircle }, colors.bg, active_left_segment),
+	heirline_utils.surround({ "", utils.chars.right_semicircle }, colors.bright_bg, left_segment),
 	Align,
-	active_middle_segment,
-	Align,
-	heirline_utils.surround({ utils.chars.left_semicircle }, colors.bg, active_right_segment),
+	heirline_utils.surround({ utils.chars.left_semicircle }, colors.bright_bg, right_segment),
 }
 
 local TerminalStatusline = {
@@ -365,7 +361,7 @@ local TerminalStatusline = {
 
 	hl = { fg = colors.terminal },
 
-	-- Quickly add a condition to the ViMode to only show it when buffer is active!
+	-- Quickly add a condition to the VimModes to only show it when buffer is active!
 	{ condition = conditions.is_active, VimModes, Space },
 	TerminalName,
 }

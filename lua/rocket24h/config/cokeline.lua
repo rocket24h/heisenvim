@@ -3,7 +3,7 @@ local _, utils = pcall(require, "rocket24h.core.utils")
 require("cokeline").setup({
 	default_hl = {
 		fg = function(buffer)
-			return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Keyword", "fg")
+			return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Comment", "fg")
 		end,
 		bg = "NONE",
 	},
@@ -18,7 +18,7 @@ require("cokeline").setup({
 					return get_hex("Normal", "fg")
 				end,
 				bg = function()
-					return get_hex("StatusLine", "bg")
+					return get_hex("Normal", "bg")
 				end,
 				bold = true,
 			},
@@ -70,7 +70,7 @@ require("cokeline").setup({
 
 			fg = function(buffer)
 				if buffer.diagnostics.errors ~= 0 then
-					return get_hex("Error", "fg")
+					return get_hex("DiagnosticError", "fg")
 				end
 				if buffer.diagnostics.warnings ~= 0 then
 					return get_hex("DiagnosticWarn", "fg")

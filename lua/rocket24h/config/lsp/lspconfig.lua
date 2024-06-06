@@ -13,12 +13,16 @@ for type, icon in pairs(signs) do
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
+-- Overwriting some highlight groups
+local highlighter = require("rocket24h.core.highlights")
+highlighter.overwrite_hl(highlighter.lsp)
+
 -- Automatically configured servers
 local servers = require("rocket24h.core.globals").servers
 local on_attach = require("rocket24h.core.keymaps").lsp()
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local config = {
-	-- on_attach = on_attach,
+	on_attach = on_attach,
 	capabilities = capabilities,
 }
 

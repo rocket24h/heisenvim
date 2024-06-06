@@ -1,20 +1,16 @@
 return {
 	-- List all of your plugins here!
 
-	-- I will be using RRethy's base16 colorscheme, Tomorrow-night variant to be specific
+	-- I will be using RRethy's mini.base16 colorscheme plugin, Tomorrow-night variant to be specific
 	-- feel free to add some more to your liking
 	{
 		"RRethy/base16-nvim",
 		priority = 1000,
-		config = function()
-			require("rocket24h.config.base16")
-		end,
 	},
+	-- Sweet light theme in case I need to toggle light mode
 	{
 		"yorickpeterse/vim-paper",
-	},
-	{
-		"p00f/alabaster.nvim",
+		lazy = true,
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -49,6 +45,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("rocket24h.config.lsp.lspconfig")
 		end,
@@ -99,6 +96,7 @@ return {
 	{
 		"mfussenegger/nvim-jdtls",
 		-- Configuration is in ftplugin/java.lua
+		lazy = true,
 	},
 	{
 		"lewis6991/gitsigns.nvim",

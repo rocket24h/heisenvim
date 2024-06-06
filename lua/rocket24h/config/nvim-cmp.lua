@@ -1,14 +1,9 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local api = vim.api
 
--- Creating a new highlight group for nvim-cmp window
--- I have a slight ick with the current color
-local cmp_fg = require("base16-colorscheme").colors.base05
-local cursor_bg = require("base16-colorscheme").colors.base0B
-local cursor_fg = require("base16-colorscheme").colors.base01
-api.nvim_set_hl(0, "CmpItemCursor", { bg = cursor_bg, fg = cursor_fg, bold = true })
-api.nvim_set_hl(0, "CmpItemAbbr", { fg = cmp_fg })
+-- Overwriting some highlight groups
+local highlighter = require("rocket24h.core.highlights")
+highlighter.overwrite_hl(highlighter.cmp)
 
 require("luasnip.loaders.from_vscode").lazy_load()
 cmp.setup({
