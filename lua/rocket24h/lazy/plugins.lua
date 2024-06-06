@@ -12,6 +12,8 @@ return {
 		"yorickpeterse/vim-paper",
 		lazy = true,
 	},
+
+	-- Bare necessities, can't live without them
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = true,
@@ -77,6 +79,8 @@ return {
 			require("rocket24h.config.nvim-cmp")
 		end,
 	},
+
+	-- QoL plugins for Neovim
 	{
 		"stevearc/conform.nvim",
 		lazy = true,
@@ -112,6 +116,26 @@ return {
 		config = true,
 	},
 	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("rocket24h.config.indent")
+		end,
+	},
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		lazy = true,
+		event = { "UIEnter" },
+		config = function()
+			require("rocket24h.config.toggleterm")
+		end,
+	},
+
+	-- New UI Component plugins
+	{
 		"willothy/nvim-cokeline",
 		lazy = true,
 		event = { "InsertEnter" },
@@ -131,29 +155,16 @@ return {
 		end,
 	},
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		lazy = true,
-		event = { "BufReadPost", "BufNewFile" },
-		config = function()
-			require("rocket24h.config.indent")
-		end,
-	},
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		lazy = true,
-		event = { "UIEnter" },
-		config = function()
-			require("rocket24h.config.toggleterm")
-		end,
-	},
-	{
 		"j-hui/fidget.nvim",
 		lazy = true,
 		event = { "LspAttach" },
 		config = function()
 			require("rocket24h.config.fidget")
 		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
 	},
 }
