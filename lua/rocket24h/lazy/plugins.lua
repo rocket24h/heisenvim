@@ -80,6 +80,40 @@ return {
 		end,
 	},
 
+	-- New UI Component plugins
+	{
+		"willothy/nvim-cokeline",
+		lazy = true,
+		event = { "InsertEnter" },
+		config = function()
+			require("rocket24h.config.cokeline")
+		end,
+	},
+	{
+		"rebelot/heirline.nvim",
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+		},
+		lazy = true,
+		event = "UIEnter",
+		config = function()
+			require("rocket24h.config.heirline")
+		end,
+	},
+	{
+		"j-hui/fidget.nvim",
+		lazy = true,
+		event = { "LspAttach" },
+		config = function()
+			require("rocket24h.config.fidget")
+		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
+
 	-- QoL plugins for Neovim
 	{
 		"stevearc/conform.nvim",
@@ -133,38 +167,22 @@ return {
 			require("rocket24h.config.toggleterm")
 		end,
 	},
-
-	-- New UI Component plugins
 	{
-		"willothy/nvim-cokeline",
-		lazy = true,
-		event = { "InsertEnter" },
+		"echasnovski/mini.ai",
+		version = "*",
 		config = function()
-			require("rocket24h.config.cokeline")
+			require("rocket24h.config.ai")
 		end,
 	},
 	{
-		"rebelot/heirline.nvim",
-		dependencies = {
-			"lewis6991/gitsigns.nvim",
-		},
-		lazy = true,
-		event = "UIEnter",
-		config = function()
-			require("rocket24h.config.heirline")
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
 		end,
-	},
-	{
-		"j-hui/fidget.nvim",
-		lazy = true,
-		event = { "LspAttach" },
 		config = function()
-			require("rocket24h.config.fidget")
+			require("rocket24h.config/which-key")
 		end,
-	},
-	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {},
 	},
 }

@@ -64,3 +64,6 @@ ts.setup({
 		end,
 	}),
 })
+
+-- Additional telescope keymaps
+require("rocket24h.core.keymaps").telescope()
