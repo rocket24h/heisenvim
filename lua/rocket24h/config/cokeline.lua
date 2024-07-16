@@ -5,7 +5,9 @@ require("cokeline").setup({
 		fg = function(buffer)
 			return buffer.is_focused and get_hex("Normal", "fg") or get_hex("Comment", "fg")
 		end,
-		bg = "NONE",
+		bg = function(buffer)
+			return buffer.is_focused and "NONE" or get_hex("CursorLine", "bg")
+		end,
 	},
 	sidebar = {
 		filetype = { "NvimTree", "neo-tree" },

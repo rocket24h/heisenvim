@@ -21,6 +21,10 @@ M.native = {
 		fg = colors.base02,
 		bg = api.nvim_get_hl(0, { name = "Normal" }).bg,
 	},
+	["StatusLine"] = {
+		fg = api.nvim_get_hl(0, { name = "StatusLine" }).fg,
+		bg = api.nvim_get_hl(0, { name = "CursorLine" }).bg,
+	},
 }
 
 M.cmp = {

@@ -1,7 +1,7 @@
 return {
 	-- List all of your plugins here!
 
-	-- I will be using RRethy's mini.base16 colorscheme plugin, Tomorrow-night variant to be specific
+	-- I will be using RRethy's base16 colorscheme plugin, Tomorrow-night variant to be specific
 	-- feel free to add some more to your liking
 	{
 		"RRethy/base16-nvim",
@@ -79,6 +79,21 @@ return {
 			require("rocket24h.config.nvim-cmp")
 		end,
 	},
+	{
+		"mfussenegger/nvim-dap",
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("rocket24h.config.lsp.dap")
+		end,
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		event = { "BufReadPost", "BufNewFile" },
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		config = function()
+			require("rocket24h.config.lsp.dap-ui")
+		end,
+	},
 
 	-- New UI Component plugins
 	{
@@ -137,6 +152,10 @@ return {
 		lazy = true,
 	},
 	{
+		"mfussenegger/nvim-dap-python",
+		lazy = true,
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
@@ -170,6 +189,7 @@ return {
 	{
 		"echasnovski/mini.ai",
 		version = "*",
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("rocket24h.config.ai")
 		end,

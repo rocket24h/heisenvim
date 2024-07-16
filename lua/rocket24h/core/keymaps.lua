@@ -96,4 +96,13 @@ function M.telescope()
 	keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", opts)
 end
 
+function M.dap()
+	local opts = disallow_remap
+
+	opts.desc = "Start/continue debug session"
+	keymap.set("n", "<F5>", "<cmd>DapContinue<CR>")
+
+	opts.desc = "Toggle breakpoint"
+	keymap.set("n", "<F9>", "<cmd>DapToggleBreakpoint<CR>")
+end
 return M

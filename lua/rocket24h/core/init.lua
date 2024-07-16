@@ -8,3 +8,4 @@ require("rocket24h.core.options")
 require("rocket24h.core.keymaps").default()
 -- Comment the line below if you don't want to lazy load nvim-tree
 require("rocket24h.core.keymaps").nvim_tree()
+require("rocket24h.core.keymaps").dap()

@@ -11,7 +11,7 @@ M.telescope_bordered = false
 -- Use arrows instead of inline markers for nvim-tree
 M.use_arrows = false
 
--- NOTE
+-- NOTE:
 -- Since we're not using 3rd-party plugins to automatically install stuff, we gotta be careful with package names
 -- I'm splitting packages to be installed and setup servers separately to prevent errors
 
@@ -46,6 +46,10 @@ M.mason_packages = {
 	"eslint_d",
 	"mypy",
 	"ruff",
+
+	-- Debuggers
+	"debugpy",
+	"codelldb",
 }
 
 return M
