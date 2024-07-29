@@ -1,7 +1,7 @@
 local M = {}
 
 -- First and foremost, your colorscheme here
-M.colorscheme = "base16-tomorrow-night"
+M.colorscheme = "kanagawa-dragon"
 
 -- I've decided to make 2 different setups for Telescope UI
 -- I'm currently using the default setup, you can switch to the

@@ -26,16 +26,16 @@ local normal_setup = {
 	},
 }
 
-local main_setup = normal_setup
+local main_setup = bordered_setup
 
-if telescope_bordered then
+if not telescope_bordered then
 	-- Change border highlight groups since base16 colors sometimes blend in the background
 	-- Feel free to change this if it troubles you
 	local highligter = require("rocket24h.core.highlights")
 	highligter.overwrite_hl(highligter.telescope)
 
 	-- If you chose to use the bordered setup
-	main_setup = bordered_setup
+	main_setup = normal_setup
 end
 
 ts.setup({

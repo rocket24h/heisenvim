@@ -8,12 +8,12 @@ dap.adapters.codelldb = {
 	type = "server",
 	port = "${port}",
 	executable = {
-		-- CHANGE THIS to your path!
+		-- CHANGE THIS to your debugger executable path!
 		command = codelldb_path .. "/extension/adapter/codelldb",
 		args = { "--port", "${port}" },
 
 		-- On windows you may have to uncomment this:
-		-- detached = false,
+		detached = false,
 	},
 }
 

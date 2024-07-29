@@ -1,3 +1,5 @@
+-- fidget.nvim's default config, I didn't write all of this
+
 require("fidget").setup({
 	-- Options related to LSP progress subsystem
 	progress = {
@@ -83,7 +85,7 @@ require("fidget").setup({
 
 		-- Options related to the notification window and buffer
 		window = {
-			normal_hl = "Comment", -- Base highlight group in the notification window
+			normal_hl = "Normal", -- Base highlight group in the notification window
 			winblend = 100, -- Background color opacity in the notification window
 			border = "none", -- Border around the notification window
 			zindex = 45, -- Stacking priority of the notification window

@@ -333,7 +333,7 @@ local left_segment = {
 		{ VimModes, Space, FileNameBlock, Space }
 	),
 	Space,
-	heirline_utils.surround({ " ", " " }, colors.bright_bg, { Git, Space }),
+	heirline_utils.surround({ " ", " " }, colors.bright_bg, { Git }),
 }
 
 local right_segment = {
@@ -344,7 +344,7 @@ local right_segment = {
 		colors.bg,
 		{ Space, LSPInfo, Space, Ruler }
 	),
-	Space,
+	heirline_utils.surround({ "", "" }, colors.bg, { Space }),
 	ScrollBar,
 }
 

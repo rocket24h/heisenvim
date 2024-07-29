@@ -2,7 +2,9 @@
 -- so I'm setting their values here to change them
 -- when their respective plugin is loaded
 local api = vim.api
-local colors = require("base16-colorscheme").colors
+-- If you're planning on using another color scheme,
+-- read their docs to see how to acquire their colors in table form
+local colors = require("kanagawa.colors").setup({ theme = "dragon" }).palette
 
 -- Call this function to automatically overwrite highlight groups
 -- NOTE that this function should be called once a plugin is loaded
@@ -17,75 +19,71 @@ local M = {}
 M.overwrite_hl = overwrite_hl
 
 M.native = {
-	["WinSeparator"] = {
-		fg = colors.base02,
+	["NormalFloat"] = {
+		fg = api.nvim_get_hl(0, { name = "NormalFloat" }).fg,
 		bg = api.nvim_get_hl(0, { name = "Normal" }).bg,
 	},
-	["StatusLine"] = {
-		fg = api.nvim_get_hl(0, { name = "StatusLine" }).fg,
-		bg = api.nvim_get_hl(0, { name = "CursorLine" }).bg,
+	["FloatBorder"] = {
+		fg = api.nvim_get_hl(0, { name = "FloatBorder" }).fg,
+		bg = api.nvim_get_hl(0, { name = "Normal" }).bg,
 	},
 }
 
 M.cmp = {
 	["CmpItemCursor"] = {
-		fg = colors.base01,
-		bg = "#a4b595",
+		fg = colors.dragonBlack1,
+		bg = colors.dragonGreen2,
 	},
 	["CmpItemAbbr"] = {
-		fg = colors.base05,
+		fg = colors.dragonWhite,
 	},
 }
 
 M.tree = {
 	["NvimTreeWindowPicker"] = {
 		fg = "#a4b595",
-		bg = colors.base01,
+		bg = colors.dragonBlack1,
 	},
 	["NvimTreeFolderIcon"] = {
 		-- Yellow
-		fg = colors.base0A,
+		fg = colors.dragonYellow,
 	},
 	["NvimTreeFolderArrowOpen"] = {
-		fg = colors.base0A,
+		fg = colors.dragonYellow,
 	},
 	["NvimTreeFolderArrowClosed"] = {
-		fg = colors.base0A,
+		fg = colors.dragonYellow,
 	},
 	["NvimTreeIndentMarker"] = {
-		fg = colors.base03,
-	},
-}
-
-M.lsp = {
-	["LspReferenceRead"] = {
-		bg = colors.base02,
-	},
-	["LspReferenceWrite"] = {
-		bg = colors.base02,
-	},
-	["LspReferenceText"] = {
-		bg = colors.base02,
+		fg = colors.dragonGray,
 	},
 }
 
 M.telescope = {
-	-- This is for the bordered setup
+	-- This is for the non-bordered setup
 	["TelescopeBorder"] = {
-		fg = colors.base02,
+		fg = colors.dragonBlack3,
 	},
 	["TelescopePromptBorder"] = {
-		fg = colors.base02,
+		fg = colors.dragonBlack3,
 	},
 	["TelescopePromptNormal"] = {
-		fg = colors.base03,
+		fg = colors.dragonGray,
 	},
 	["TelescopePromptPrefix"] = {
-		fg = colors.base08,
+		fg = colors.dragonYellow,
+	},
+	["TelescopeTitle"] = {
+		fg = colors.dragonBlack3,
+	},
+	["TelescopePromptTitle"] = {
+		bg = colors.dragonBlue2,
+	},
+	["TelescopePreviewTitle"] = {
+		bg = colors.dragonOrange2,
 	},
 	["TelescopeResultsTitle"] = {
-		fg = api.nvim_get_hl(0, { name = "TelescopeResultsTitle" }).bg,
-		bg = colors.base0D,
+		bg = colors.dragonGreen2,
 	},
 }
 return M

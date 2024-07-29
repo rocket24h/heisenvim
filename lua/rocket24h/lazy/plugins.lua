@@ -1,11 +1,18 @@
 return {
 	-- List all of your plugins here!
 
-	-- I will be using RRethy's base16 colorscheme plugin, Tomorrow-night variant to be specific
-	-- feel free to add some more to your liking
+	-- NOTE:
+	-- I will be using rebelot's Kanagawa colorscheme plugin, dragon variant to be specific
+	-- Feel free to add some more to your liking
+	-- (Switched from base16 due to some poor syntax highlighting and I don't feel like rewriting them all)
 	{
-		"RRethy/base16-nvim",
+		"rebelot/kanagawa.nvim",
 		priority = 1000,
+		theme = "wave",
+		background = {
+			dark = "dragon",
+			light = "lotus",
+		},
 	},
 	-- Sweet light theme in case I need to toggle light mode
 	{
