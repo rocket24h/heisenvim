@@ -49,3 +49,6 @@ opt.fillchars = { eob = " " }
 
 -- Decrease update time
 opt.updatetime = 250
+
+-- Sessions
+opt.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,globals"

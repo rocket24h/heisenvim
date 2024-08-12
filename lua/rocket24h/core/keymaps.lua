@@ -30,7 +30,6 @@ function M.default()
 end
 
 function M.nvim_tree()
-	-- Toggle nvim-tree file explorer
 	local opts = disallow_remap
 	opts.desc = "Toggle NvimTree"
 	keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", opts)

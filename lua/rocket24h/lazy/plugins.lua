@@ -35,6 +35,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		event = { "VimEnter" },
 		config = function()
 			require("rocket24h.config.nvim-treesitter")
 		end,
@@ -199,6 +200,46 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("rocket24h.config.ai")
+		end,
+	},
+	{
+		-- Using echasnovski's mini.icons instead of nvim-web-devicons,
+		-- remove the config to disable it
+		"echasnovski/mini.icons",
+		opts = {},
+		lazy = true,
+		specs = {
+			{ "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
+		},
+		init = function()
+			package.preload["nvim-web-devicons"] = function()
+				require("mini.icons").mock_nvim_web_devicons()
+				return package.loaded["nvim-web-devicons"]
+			end
+		end,
+	},
+	{
+		"echasnovski/mini.animate",
+		version = "*",
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("mini.animate").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.starter",
+		version = "*",
+		config = function()
+			require("rocket24h.config.starter")
+		end,
+	},
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		lazy = true,
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("rocket24h.config.telescope-ui-select")
 		end,
 	},
 	{

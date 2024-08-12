@@ -64,9 +64,6 @@ M.telescope = {
 	["TelescopeBorder"] = {
 		fg = colors.dragonBlack3,
 	},
-	["TelescopePromptBorder"] = {
-		fg = colors.dragonBlack3,
-	},
 	["TelescopePromptNormal"] = {
 		fg = colors.dragonGray,
 	},
@@ -74,7 +71,7 @@ M.telescope = {
 		fg = colors.dragonYellow,
 	},
 	["TelescopeTitle"] = {
-		fg = colors.dragonBlack3,
+		fg = colors.dragonBlack1,
 	},
 	["TelescopePromptTitle"] = {
 		bg = colors.dragonBlue2,
@@ -84,6 +81,9 @@ M.telescope = {
 	},
 	["TelescopeResultsTitle"] = {
 		bg = colors.dragonGreen2,
+	},
+	["TelescopeSelectionCaret"] = {
+		fg = colors.dragonWhite,
 	},
 }
 return M
