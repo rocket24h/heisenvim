@@ -6,7 +6,7 @@ end
 
 require("toggleterm").setup({
 	size = 15,
-	shell = shell,
+	shell = vim.o.shell,
 	-- direction = "vertical",
 	open_mapping = [[<c-\>]],
 	shade_filetypes = {},
