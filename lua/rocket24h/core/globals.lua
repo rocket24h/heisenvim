@@ -18,7 +18,7 @@ M.use_arrows = false
 -- Define language servers to be set up here
 -- See nvim-lspconfig documentations for the supported servers
 M.servers = {
-	"basedpyright",
+	"pyright",
 	"clangd",
 	"html",
 	"cssls",
@@ -29,7 +29,7 @@ M.servers = {
 -- Make sure these entries correspond to those listed in the Mason UI
 M.mason_packages = {
 	-- LSPs
-	"basedpyright",
+	"pyright",
 	"clangd",
 	"html-lsp",
 	"css-lsp",

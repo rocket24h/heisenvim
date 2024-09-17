@@ -17,7 +17,6 @@
   "mini.ai": { "branch": "main", "commit": "a7e90f110e6274262616311b93cef12cd2667a2d" },
   "mini.animate": { "branch": "main", "commit": "0a35f6db55cfac04a0999abe3465f7b692dc56a7" },
   "mini.icons": { "branch": "main", "commit": "8d35c9fbcce7f4c2f0404f694441f5782a407496" },
-  "mini.sessions": { "branch": "main", "commit": "a36b78d12fc16c938ba7a1e5ad1300d43c8bb848" },
   "mini.starter": { "branch": "main", "commit": "3c6ed3caaadef35291e98f0701038254ee1e78b0" },
   "nvim-autopairs": { "branch": "master", "commit": "78a4507bb9ffc9b00f11ae0ac48243d00cb9194d" },
   "nvim-cmp": { "branch": "main", "commit": "a110e12d0b58eefcf5b771f533fc2cf3050680ac" },

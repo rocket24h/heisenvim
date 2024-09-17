@@ -1,7 +1,7 @@
-local shell = vim.o.shell
+local shell = "powershell"
 
-if vim.fn.has("win32") then
-	shell = "powershell"
+if vim.uv.os_uname().sysname == "Linux" then
+	shell = vim.o.shell
 end
 
 require("toggleterm").setup({
