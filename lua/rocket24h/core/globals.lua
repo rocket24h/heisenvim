@@ -24,6 +24,7 @@ M.servers = {
 	"cssls",
 	"eslint",
 	"vimls",
+	"lemminx",
 }
 
 -- Make sure these entries correspond to those listed in the Mason UI
@@ -37,6 +38,7 @@ M.mason_packages = {
 	"vim-language-server",
 	"lua-language-server",
 	"jdtls",
+	"lemminx",
 
 	-- Linters & Formatters
 	"prettier",
