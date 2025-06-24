@@ -1,4 +1,9 @@
-require("gitsigns").setup({
+local ok, gitsigns = pcall(require, "gitsigns")
+if not ok then
+	return
+end
+
+gitsigns.setup({
 	signs = {
 		add = { text = "┃" },
 		change = { text = "┃" },
@@ -37,4 +42,7 @@ require("gitsigns").setup({
 		row = 0,
 		col = 1,
 	},
+	-- Add these new options to prevent the callback error
+	trouble = false,
+	_git_version = "auto",
 })

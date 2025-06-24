@@ -86,20 +86,27 @@ return {
 		config = function()
 			require("rocket24h.config.nvim-cmp")
 		end,
-	},
-	{
+	},	{
 		"mfussenegger/nvim-dap",
+		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
+		dependencies = { "williamboman/mason.nvim" },
 		config = function()
-			require("rocket24h.config.lsp.dap")
+			-- Delay DAP setup to ensure Mason is ready
+			vim.defer_fn(function()
+				require("rocket24h.config.lsp.dap")
+			end, 100)
 		end,
-	},
-	{
+	},	{
 		"rcarriga/nvim-dap-ui",
+		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
 		config = function()
-			require("rocket24h.config.lsp.dap-ui")
+			-- Ensure DAP is loaded before DAP UI
+			vim.defer_fn(function()
+				require("rocket24h.config.lsp.dap-ui")
+			end, 150)
 		end,
 	},
 
@@ -161,14 +168,19 @@ return {
 	},
 	{
 		"mfussenegger/nvim-dap-python",
-		lazy = true,
-	},
-	{
+		lazy = true,	},	{
 		"lewis6991/gitsigns.nvim",
+		tag = "v0.7", -- Pin to a stable version
 		lazy = true,
-		event = { "BufReadPost", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile", "BufWritePost" },
+		cond = function()
+			return vim.fn.executable("git") == 1
+		end,
 		config = function()
-			require("rocket24h.config.gitsigns")
+			-- Delay the setup slightly to avoid callback conflicts
+			vim.defer_fn(function()
+				require("rocket24h.config.gitsigns")
+			end, 10)
 		end,
 	},
 	{
