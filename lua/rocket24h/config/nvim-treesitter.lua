@@ -3,12 +3,14 @@ require("nvim-treesitter.install").prefer_git = true
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
+		-- Disable vim's regex highlighting
+		additional_vim_regex_highlighting = false,
 	},
 	indent = { enable = true },
 	ensure_installed = {
 		"vim",
-    "vimdoc",
-    "markdown",
+		"vimdoc",
+		"markdown",
 		"lua",
 		"html",
 		"css",
@@ -18,7 +20,7 @@ require("nvim-treesitter.configs").setup({
 		"cpp",
 		"python",
 		"dockerfile",
-    "java",
+		"java",
 	},
 	incremental_selection = {
 		enable = true,
@@ -30,3 +32,10 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 })
+
+-- Force install Python parser if not available
+local parsers = require("nvim-treesitter.parsers")
+if not parsers.has_parser("python") then
+	vim.cmd("TSInstall python")
+end
+

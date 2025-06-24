@@ -2,16 +2,16 @@ local lspconfig = require("lspconfig")
 local utils = require("rocket24h.core.utils")
 
 -- Setting up some diagnostics icons first
-local signs = {
-	Error = utils.diagnostics.error,
-	Warn = utils.diagnostics.warn,
-	Hint = utils.diagnostics.hint,
-	Info = utils.diagnostics.info,
-}
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = utils.diagnostics.error,
+			[vim.diagnostic.severity.WARN] = utils.diagnostics.warn,
+			[vim.diagnostic.severity.HINT] = utils.diagnostics.hint,
+			[vim.diagnostic.severity.INFO] = utils.diagnostics.info,
+		},
+	},
+})
 
 -- Automatically configured servers
 local servers = require("rocket24h.core.globals").servers
@@ -23,11 +23,12 @@ local config = {
 }
 
 for _, server in ipairs(servers) do
-	lspconfig[server].setup({ config })
+	lspconfig[server].setup(config)
 end
 
 -- Custom configuration for certain servers
 lspconfig["lua_ls"].setup({
+	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = { -- custom settings for lua
 		Lua = {

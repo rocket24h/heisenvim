@@ -8,8 +8,23 @@ vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and ";" or 
 vim.cmd.colorscheme(require("rocket24h.core.globals").colorscheme)
 opt.termguicolors = true
 opt.background = "dark"
-local highlighter = require("rocket24h.core.highlights")
-highlighter.overwrite_hl(highlighter.native)
+
+-- Ensure treesitter highlighting works before applying custom highlights
+vim.defer_fn(function()
+	-- Force enable treesitter for all open buffers
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_is_loaded(buf) then
+			local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+			if ft == "python" then
+				vim.treesitter.start(buf, "python")
+			end
+		end
+	end
+	
+	-- Apply custom highlights after treesitter is ready
+	local highlighter = require("rocket24h.core.highlights")
+	highlighter.overwrite_hl(highlighter.native)
+end, 200)
 
 -----------------
 -- QoL config

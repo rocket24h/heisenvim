@@ -71,3 +71,19 @@ autocmd("LspAttach", {
 		end
 	end,
 })
+
+-- Auto-command to ensure highlighting works for Python files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		-- Force enable treesitter highlighting
+		vim.treesitter.start(buf, "python")
+		-- Small delay to ensure everything is loaded
+		vim.defer_fn(function()
+			if vim.api.nvim_buf_is_valid(buf) then
+				vim.cmd("TSBufEnable highlight")
+			end
+		end, 100)
+	end,
+})
