@@ -22,6 +22,7 @@ cmp.setup({
 	},
 
 	sources = cmp.config.sources({
+		{ name = "copilot" },
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "buffer" },
@@ -64,6 +65,12 @@ cmp.setup({
 			local strings = vim.split(kind.kind, "%s", { trimempty = true })
 			kind.kind = " " .. (strings[1] or "") .. " "
 			kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+			-- Set icon for copilot cmp suggestions
+			if entry.source.name == "copilot" then
+				kind.kind = " "
+				kind.menu = "    (Copilot)"
+			end
 			return kind
 		end,
 	},

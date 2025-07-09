@@ -7,7 +7,7 @@ local palette = require("kanagawa.colors").setup().palette
 local colors = {
 	bg = palette.dragonBlack1,
 	fg = palette.dragonWhite,
-	bright_bg = palette.dragonBlack5,
+	bright_bg = palette.dragonBlack4,
 	bright_fg = palette.fujiWhite,
 	red = palette.dragonRed,
 	green = palette.dragonGreen,
@@ -17,6 +17,7 @@ local colors = {
 	purple = palette.dragonViolet,
 	cyan = palette.dragonTeal,
 	yellow = palette.dragonYellow,
+
 	diag_warn = get_hl("DiagnosticWarn").fg,
 	diag_error = get_hl("DiagnosticError").fg,
 	diag_hint = get_hl("DiagnosticHint").fg,

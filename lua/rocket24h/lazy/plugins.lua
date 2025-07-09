@@ -22,6 +22,20 @@ return {
 
 	-- Bare necessities, can't live without them
 	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({})
+		end,
+	},
+	{
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
+	},
+	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = true,
 		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
@@ -86,7 +100,8 @@ return {
 		config = function()
 			require("rocket24h.config.nvim-cmp")
 		end,
-	},	{
+	},
+	{
 		"mfussenegger/nvim-dap",
 		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
@@ -97,7 +112,8 @@ return {
 				require("rocket24h.config.lsp.dap")
 			end, 100)
 		end,
-	},	{
+	},
+	{
 		"rcarriga/nvim-dap-ui",
 		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
@@ -168,7 +184,9 @@ return {
 	},
 	{
 		"mfussenegger/nvim-dap-python",
-		lazy = true,	},	{
+		lazy = true,
+	},
+	{
 		"lewis6991/gitsigns.nvim",
 		tag = "v0.7", -- Pin to a stable version
 		lazy = true,

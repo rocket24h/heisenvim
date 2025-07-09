@@ -73,7 +73,7 @@ autocmd("LspAttach", {
 })
 
 -- Auto-command to ensure highlighting works for Python files
-vim.api.nvim_create_autocmd("FileType", {
+autocmd("FileType", {
 	pattern = "python",
 	callback = function()
 		local buf = vim.api.nvim_get_current_buf()
